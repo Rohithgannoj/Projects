@@ -5,11 +5,10 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GeneratorType;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,21 +19,26 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "SavingsAccounts")
 public class SavingsAccount {
-	
+
 	@Id
 	@SequenceGenerator(initialValue = 120000000, name = "SavingsAccountSeries")
-	@Column(nullable = false,length = 10,unique = true)
+	@Column(nullable = false, length = 10, unique = true)
 	private Long accountNumber;
-	@Column(nullable = false,length = 10)
+	
+	@Column(nullable = false, length = 10)
 	private String accountHolderName;
+	
 	@Column(nullable = false)
-	private Date dateOfBirth; 
+	private Date dateOfBirth;
+	
 	@Column(nullable = false)
 	private String fatherName;
-	@Column(nullable = false)
+	
+	@OneToOne
+	@MapsId
 	private AddressLocation addressLocation;
+	
 	@Column(nullable = false)
 	private Long phoneNumber;
- 
-   
+
 }
